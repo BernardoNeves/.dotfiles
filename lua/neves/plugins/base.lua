@@ -1,11 +1,10 @@
 return {
     { "stevearc/dressing.nvim", opts = {} },
+    "rcarriga/nvim-notify",
     {
         "folke/noice.nvim",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            'nvim-notify',
-            "rcarriga/nvim-notify",
         }
     },
 

@@ -52,7 +52,7 @@ end)
 
 --vim.cmd("command! -nargs=0 W w")
 
-local presenceEnabled = true;
+local presenceEnabled = false;
 local presence = require("presence");
 
 function PresenceToggle()
@@ -60,12 +60,12 @@ function PresenceToggle()
     if presenceEnabled then
         presence:update();
         vim.fn["presence#SetAutoCmds"]()
-        vim.notify("Discord Rich Presence enabled", 0, { title = "Presence" });
+        require("notify")("Discord Rich Presence enabled", "Presence")
         vim.cmd [[lua package.loaded.presence:update()]]
     else
         presence:cancel();
         vim.cmd [[autocmd! presence_events]]
-        vim.notify("Discord Rich Presence disabled", 0, { title = "Presence" });
+        require("notify")("Discord Rich Presence disabled", "Presence")
     end
 end
 

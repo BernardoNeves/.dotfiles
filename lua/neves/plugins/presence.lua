@@ -1,17 +1,18 @@
 return {
     'andweeb/presence.nvim',
     config = function()
-        require("presence").setup({
+        local presence = require("presence")
+        presence.setup({
 
             auto_update        = true,
-            neovim_image_text  = "The One True Text Editor",
+            neovim_image_text  = "I use vim btw",
             main_image         = "neovim",
             client_id          = "793271441293967371",
             log_level          = nil,
             debounce_timeout   = 0,
             enable_line_number = false,
             blacklist          = {},
-            buttons            = true,
+            buttons            = false,
             file_assets        = {},
             show_time          = true,
 
@@ -24,5 +25,7 @@ return {
             workspace_text      = "Working on %s",
             line_number_text    = "Line %s out of %s",
         })
+        presence:cancel()
+        vim.cmd [[autocmd! presence_events]]
     end
 }

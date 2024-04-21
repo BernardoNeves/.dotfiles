@@ -13,6 +13,9 @@ return {
                 path = "D:/Notes",
             },
         },
+        templates = {
+            subdir = "Templates",
+        },
 
     },
 }
