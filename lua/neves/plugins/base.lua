@@ -1,6 +1,24 @@
 return {
     { "stevearc/dressing.nvim", opts = {} },
-    "rcarriga/nvim-notify",
+    {
+        "rcarriga/nvim-notify",
+        config = function()
+            local notify = require("notify")
+            notify.setup({
+                timeout = 1000,
+                background_colour = "#000000",
+                icons = {
+                    ERROR = "",
+                    WARN = "",
+                    INFO = "",
+                    DEBUG = "",
+                    TRACE = "✎",
+                },
+            })
+            vim.notify = notify
+        end
+    },
+
     {
         "folke/noice.nvim",
         dependencies = {

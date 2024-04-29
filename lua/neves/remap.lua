@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pV", function()
+    vim.cmd("e " .. vim.fn.getcwd())
+end)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -37,9 +40,9 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/AppData/Local/nvim/lua/neves/plugins<CR>");
-vim.keymap.set("n", "<leader>vpc", "<cmd>e ~/AppData/Local/nvim/lua/neves/ <CR>");
+-- e ~/AppData/Local/nvim/
+vim.keymap.set("n", "<leader>vpp", "<cmd>cd ~/AppData/Local/nvim/<CR> <cmd>lua require('telescope.builtin').find_files()<CR>")
+vim.keymap.set("n", "<leader>h", "<cmd>Dashboard<CR>")
 
 vim.keymap.set("n", "<Up>", "<nop>")
 vim.keymap.set("n", "<Down>", "<nop>")
@@ -50,7 +53,7 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
---vim.cmd("command! -nargs=0 W w")
+vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>")
 
 local presenceEnabled = false;
 local presence = require("presence");
@@ -60,12 +63,12 @@ function PresenceToggle()
     if presenceEnabled then
         presence:update();
         vim.fn["presence#SetAutoCmds"]()
-        require("notify")("Discord Rich Presence enabled", "Presence")
+        vim.notify("Enabled Discord Rich Presence", vim.log.levels.INFO, { title = "Presence" })
         vim.cmd [[lua package.loaded.presence:update()]]
     else
         presence:cancel();
         vim.cmd [[autocmd! presence_events]]
-        require("notify")("Discord Rich Presence disabled", "Presence")
+        vim.notify("Disabled Discord Rich Presence", vim.log.levels.INFO, { title = "Presence" })
     end
 end
 

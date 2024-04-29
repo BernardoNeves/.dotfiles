@@ -29,6 +29,7 @@ return {
             vim.keymap.set('n', '<leader>pw', function() builtin.grep_string({ search = vim.fn.expand("<cword>") }) end)
             vim.keymap.set('n', '<leader>pW', function() builtin.grep_string({ search = vim.fn.expand("<cWORD>") }) end)
             vim.keymap.set('n', '<leader>ps', function() builtin.grep_string({ search = vim.fn.input("Grep > ") }) end)
+            vim.keymap.set('n', '<leader>pg', builtin.live_grep, {})
             vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
         end
     },

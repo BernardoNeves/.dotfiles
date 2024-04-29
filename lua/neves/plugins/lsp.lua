@@ -20,7 +20,12 @@ return {
             handlers = {
                 function(server_name)
                     require("lspconfig")[server_name].setup({
-                        capabilities = capabilities
+                        capabilities = capabilities,
+                        on_attach = function(client, bufnr)
+                            -- if client.server_capabilities.documentSymbolProvider then
+                            require('nvim-navic').attach(client, bufnr)
+                            -- end
+                        end
                     })
                 end,
                 ["lua_ls"] = function()
