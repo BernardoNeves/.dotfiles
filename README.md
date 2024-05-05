@@ -7,7 +7,7 @@ Welcome to my personal Neovim configuration repository! This setup is tailored t
 To use this configuration, clone the repository into your Neovim configuration directory. If you have existing configurations, make sure to back them up first.
 
 ```bash
-git clone https://github.com/yourusername/neovim-config.git ~/.config/nvim
+git clone https://github.com/BernardoNeves/.dotfiles/ ~/.config/nvim
 ```
 
 # Plugins
