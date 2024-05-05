@@ -41,7 +41,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- e ~/AppData/Local/nvim/
-vim.keymap.set("n", "<leader>vpp",
+vim.keymap.set("n", "<leader>pc",
     "<cmd>cd ~/AppData/Local/nvim/<CR> <cmd>lua require('telescope.builtin').find_files()<CR>")
 vim.keymap.set("n", "<leader>h", "<cmd>Dashboard<CR>")
 
