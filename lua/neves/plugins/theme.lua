@@ -149,6 +149,11 @@ function ColorSchemePicker()
         '<cmd>lua vim.api.nvim_win_close(' .. win .. ', true)<CR>',
         { noremap = true, silent = true }
     )
+    vim.api.nvim_buf_set_keymap(
+        buffer, 'n', '<C-p>',
+        '<cmd>lua if vim.fn.line(".") > 1 then vim.api.nvim_win_set_cursor(0, {vim.fn.line(".") - 1, 0}) end<CR>',
+        { noremap = true, silent = true }
+    )
 end
 
 local init = function()
@@ -156,6 +161,7 @@ local init = function()
     if color == nil or color == '' then
         vim.notify('No color scheme selected, using default', vim.log.levels.WARN, { title = 'ColorScheme' })
         color = 'tokyonight-night'
+        saveSelectedColorScheme(color)
     end
     ApplyColorScheme(color)
     current_color = color
