@@ -14,6 +14,19 @@ return {
             vim.lsp.protocol.make_client_capabilities(),
             cmp.default_capabilities())
         require("mason").setup()
+
+        require('lspconfig').gdscript.setup({
+            capabilities = capabilities,
+            on_attach = function(client, bufnr)
+                require('nvim-navic').attach(client, bufnr)
+            end,
+            root_dir = require('lspconfig.util').root_pattern('project.godot', '.git'),
+            cmd = { 'ncat', '127.0.0.1', '6005' },
+            flags = {
+                debounce_text_changes = 150,
+            }
+        })
+
         require("mason-lspconfig").setup({
             sync_install = true,
             auto_install = true,
@@ -29,8 +42,7 @@ return {
                     })
                 end,
                 ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
+                    require("lspconfig").lua_ls.setup {
                         capabilities = capabilities,
                         settings = {
                             Lua = {
@@ -60,7 +72,7 @@ return {
                             }
                         }
                     })
-                end
+                end,
             },
         })
         require("fidget").setup()
@@ -82,5 +94,4 @@ return {
         })
         vim.diagnostic.config({ virtual_text = true })
     end,
-
 }

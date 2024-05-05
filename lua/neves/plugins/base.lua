@@ -48,4 +48,13 @@ return {
             require 'colorizer'.setup()
         end
     },
+    {
+        "lervag/vimtex",
+        lazy = false,
+        config = function()
+        end
+    },
+    {
+        'habamax/vim-godot',
+    },
 }

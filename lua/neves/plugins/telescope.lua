@@ -7,7 +7,35 @@ return {
         config = function()
             require('telescope').setup({
                 defaults = {
-                    file_ignore_patterns = { "node_modules", ".git", ".rf", ".cache", ".png", ".jpg", ".jpeg", ".mp4", ".avi", ".pyd", ".whl", ".pkl", "dist" },
+                    file_ignore_patterns = {
+                        "node_modules",
+                        "%.git",
+                        "%.rf",
+                        "%.pt",
+                        "%.cache",
+                        "%.png",
+                        "%.jpg",
+                        "%.jpeg",
+                        "%.mp4",
+                        "%.avi",
+                        "%.wav",
+                        "%.mp3",
+                        "%.pyd",
+                        "%.whl",
+                        "%.pkl",
+                        "%.csproj",
+                        "%.cginc",
+                        "%.sln",
+                        "%.asset",
+                        "%.prefab",
+                        "%.unity",
+                        "%.dll",
+                        "%.physicMaterial",
+                        "%.physicMaterial2D",
+                        "%.meta",
+                        "Library\\",
+                        "dist\\",
+                    },
                     hidden_files = true,
                     search_by = { "title", "path" },
                     order_by = "desc",
@@ -28,8 +56,7 @@ return {
             vim.keymap.set('n', '<C-p>', builtin.git_files, {})
             vim.keymap.set('n', '<leader>pw', function() builtin.grep_string({ search = vim.fn.expand("<cword>") }) end)
             vim.keymap.set('n', '<leader>pW', function() builtin.grep_string({ search = vim.fn.expand("<cWORD>") }) end)
-            vim.keymap.set('n', '<leader>ps', function() builtin.grep_string({ search = vim.fn.input("Grep > ") }) end)
-            vim.keymap.set('n', '<leader>pg', builtin.live_grep, {})
+            vim.keymap.set('n', '<leader>ps', builtin.live_grep, {})
             vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
         end
     },

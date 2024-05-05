@@ -7,6 +7,7 @@ return {
     config = function()
         require('breadcrumbs').setup()
         require('nvim-navic').setup()
+        vim.g.navic_silence = true
     end
 
 }
