@@ -28,6 +28,7 @@ return {
                         "%.sln",
                         "%.asset",
                         "%.prefab",
+                        "%.mat",
                         "%.unity",
                         "%.dll",
                         "%.physicMaterial",

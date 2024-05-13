@@ -15,6 +15,20 @@ return {
         local cmp = require 'cmp'
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
+        local devicons = require('nvim-web-devicons')
+        cmp.register_source('devicons', {
+            complete = function(self, params, callback)
+                local items = {}
+                for _, icon in pairs(devicons.get_icons()) do
+                    table.insert(items, {
+                        label = icon.icon .. '  ' .. icon.name,
+                        insertText = icon.icon,
+                        filterText = icon.name,
+                    })
+                end
+                callback({ items = items })
+            end,
+        })
         cmp.setup({
             snippet = {
                 expand = function(args)
@@ -23,6 +37,7 @@ return {
             },
             window = {
                 completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
             },
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),

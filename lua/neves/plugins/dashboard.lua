@@ -58,8 +58,8 @@ return
                 change_to_vcs_root = false,
                 hide = {
                     statusline = false,
-                    tabline = false,
-                    winbar = false,
+                    tabline = true,
+                    winbar = true,
                 },
                 preview = {
                     file_path   = '',

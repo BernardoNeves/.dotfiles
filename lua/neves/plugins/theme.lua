@@ -23,7 +23,6 @@ end
 
 function ApplyColorScheme(color)
     vim.cmd.colorscheme(color)
-    require('lualine').setup()
     if transparent_bg then
         vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
         vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
@@ -89,6 +88,7 @@ function ColorSchemePicker()
         'terafox',
         'tokyonight',
         'tokyonight-day',
+        'tokyonight-storm',
     }
 
     for i = #color_schemes, 1, -1 do

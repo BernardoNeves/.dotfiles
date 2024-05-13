@@ -83,6 +83,7 @@ end)
 
 -- Open Lazy
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>")
+vim.keymap.set("n", "<leader>m", "<cmd>Mason<cr>")
 
 -- Toggle Discord Rich Presence
 local presenceEnabled = false;

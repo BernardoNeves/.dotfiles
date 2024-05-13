@@ -57,4 +57,7 @@ return {
     {
         'habamax/vim-godot',
     },
+    {
+        'RRethy/vim-illuminate',
+    },
 }
