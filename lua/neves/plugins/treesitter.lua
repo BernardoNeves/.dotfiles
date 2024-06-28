@@ -14,5 +14,6 @@ return {
                 enable = false,
             },
         }
+        vim.treesitter.language.register('hlsl', '.shader')
     end,
 }

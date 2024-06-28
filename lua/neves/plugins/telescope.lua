@@ -88,7 +88,9 @@ return {
                 }
             })
             require('telescope').load_extension('project')
-            vim.api.nvim_set_keymap('n', '<leader>pm', ":lua require'telescope'.extensions.project.project{}<CR>",
+            vim.api.nvim_set_keymap('n', '<leader>pp', ":lua require'telescope'.extensions.project.project{}<cr>",
+                { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>pm', ":lua require'telescope'.extensions.project.project{}<cr>",
                 { noremap = true, silent = true })
         end
     }

@@ -25,7 +25,13 @@ return {
             workspace_text      = "Working on %s",
             line_number_text    = "Line %s out of %s",
         })
-        presence:cancel()
-        vim.cmd [[autocmd! presence_events]]
+        local start_on_init = true
+        if start_on_init then
+            vim.notify("Enabled Discord Rich Presence", vim.log.levels.INFO, { title = "Presence" })
+        else
+            presence:cancel()
+            vim.cmd [[autocmd! presence_events]]
+            vim.notify("Disabled Discord Rich Presence", vim.log.levels.INFO, { title = "Presence" })
+        end
     end
 }

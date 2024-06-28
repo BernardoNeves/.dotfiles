@@ -28,6 +28,19 @@ vim.keymap.set("n", "<leader>W", "<C-W>w")
 vim.keymap.set("n", "<leader>wV", ":vnew<CR>")
 vim.keymap.set("n", "<leader>wS", ":new<CR>")
 
+-- Move between panes
+vim.keymap.set("n", "<C-h>", "<C-W>h", { noremap = true , silent = true })
+vim.keymap.set("n", "<C-j>", "<C-W>j", { noremap = true , silent = true })
+vim.keymap.set("n", "<C-k>", "<C-W>k", { noremap = true , silent = true })
+vim.keymap.set("n", "<C-l>", "<C-W>l", { noremap = true , silent = true })
+
+-- Resize panes
+vim.keymap.set("n", "<C-Left>", "<C-W><")
+vim.keymap.set("n", "<C-Down>", "<C-W>-")
+vim.keymap.set("n", "<C-Up>", "<C-W>+")
+vim.keymap.set("n", "<C-Right>", "<C-W>>")
+
+
 -- Paste and delete into void register
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
@@ -59,22 +72,22 @@ vim.keymap.set("n", "<leader>pc",
 vim.keymap.set("n", "<leader>h", "<cmd>Dashboard<CR>")
 
 -- Disable arrow keys to force hjkl and character movement
-vim.keymap.set({"n", "i"}, "<Up>", "<nop>")
-vim.keymap.set({"n", "i"}, "<Down>", "<nop>")
-vim.keymap.set({"n", "i"}, "<Left>", "<nop>")
-vim.keymap.set({"n", "i"}, "<Right>", "<nop>")
-vim.keymap.set({"n", "i"}, "<C-Up>", "<nop>")
-vim.keymap.set({"n", "i"}, "<C-Down>", "<nop>")
-vim.keymap.set({"n", "i"}, "<C-Left>", "<nop>")
-vim.keymap.set({"n", "i"}, "<C-Right>", "<nop>")
-vim.keymap.set({"n", "i"}, "<S-Up>", "<nop>")
-vim.keymap.set({"n", "i"}, "<S-Down>", "<nop>")
-vim.keymap.set({"n", "i"}, "<S-Left>", "<nop>")
-vim.keymap.set({"n", "i"}, "<S-Right>", "<nop>")
-vim.keymap.set({"n", "i"}, "<C-S-Up>", "<nop>")
-vim.keymap.set({"n", "i"}, "<C-S-Down>", "<nop>")
-vim.keymap.set({"n", "i"}, "<C-S-Left>", "<nop>")
-vim.keymap.set({"n", "i"}, "<C-S-Right>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<Up>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<Down>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<Left>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<Right>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<C-Up>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<C-Down>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<C-Left>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<C-Right>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<S-Up>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<S-Down>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<S-Left>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<S-Right>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<C-S-Up>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<C-S-Down>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<C-S-Left>", "<nop>")
+-- vim.keymap.set({"n", "i"}, "<C-S-Right>", "<nop>")
 
 -- Source current file
 vim.keymap.set("n", "<leader><leader>", function()
@@ -85,20 +98,26 @@ end)
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>")
 vim.keymap.set("n", "<leader>m", "<cmd>Mason<cr>")
 
+local function autocmd_exists(group_name)
+    local autocmds = vim.api.nvim_get_autocmds({ group = group_name })
+    if #autocmds > 0 then
+        return true
+    end
+    return false
+end
+
 -- Toggle Discord Rich Presence
-local presenceEnabled = false;
 local presence = require("presence");
 function PresenceToggle()
-    presenceEnabled = not presenceEnabled;
-    if presenceEnabled then
+    if autocmd_exists("presence_events") then
+        presence:cancel();
+        vim.cmd [[autocmd! presence_events]]
+        vim.notify("Disabled Discord Rich Presence", vim.log.levels.INFO, { title = "Presence" })
+    else
         presence:update();
         vim.fn["presence#SetAutoCmds"]()
         vim.notify("Enabled Discord Rich Presence", vim.log.levels.INFO, { title = "Presence" })
         vim.cmd [[lua package.loaded.presence:update()]]
-    else
-        presence:cancel();
-        vim.cmd [[autocmd! presence_events]]
-        vim.notify("Disabled Discord Rich Presence", vim.log.levels.INFO, { title = "Presence" })
     end
 end
 
